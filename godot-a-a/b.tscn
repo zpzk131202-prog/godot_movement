@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://bweij75jtxvig"]
+
+[ext_resource type="Script" path="res://b_script.gd" id="1_d0y8m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8v1p3"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player"]
+albedo_color = Color(0.239216, 0.521569, 0.776471, 1)
+roughness = 0.35
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.5
+mid_height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.74902, 0.843137, 0.564706, 1)
+roughness = 0.95
+
+[sub_resource type="QuadMesh" id="QuadMesh_ground"]
+size = Vector2(18, 18)
+
+[node name="B" type="CharacterBody3D"]
+position = Vector3(0, 0.5, 0)
+script = ExtResource("1_d0y8m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8v1p3")
+
+[node name="PlayerVisual" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("StandardMaterial3D_player")
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Tile_0_0" type="MeshInstance3D" parent="Background"]
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_-1_-1" type="MeshInstance3D" parent="Background"]
+position = Vector3(-18, 0, -18)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_0_-1" type="MeshInstance3D" parent="Background"]
+position = Vector3(0, 0, -18)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_1_-1" type="MeshInstance3D" parent="Background"]
+position = Vector3(18, 0, -18)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_-1_0" type="MeshInstance3D" parent="Background"]
+position = Vector3(-18, 0, 0)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_1_0" type="MeshInstance3D" parent="Background"]
+position = Vector3(18, 0, 0)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_-1_1" type="MeshInstance3D" parent="Background"]
+position = Vector3(-18, 0, 18)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_0_1" type="MeshInstance3D" parent="Background"]
+position = Vector3(0, 0, 18)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Tile_1_1" type="MeshInstance3D" parent="Background"]
+position = Vector3(18, 0, 18)
+mesh = SubResource("QuadMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+rotation = Vector3(-1.5708, 0, 0)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+position = Vector3(0, 8, 0)
+rotation = Vector3(-0.959931, 0.523599, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 18, 14)
+rotation = Vector3(-0.872665, 0, 0)
+projection = 1
+size = 20.0
+current = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SpeedPanel" type="PanelContainer" parent="UI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 300.0
+offset_bottom = 210.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/SpeedPanel"]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SpeedPanel/MarginContainer"]
+
+[node name="SpeedLabel" type="Label" parent="UI/SpeedPanel/MarginContainer/VBoxContainer"]
+text = "Speed: 12"
+
+[node name="SpeedInput" type="LineEdit" parent="UI/SpeedPanel/MarginContainer/VBoxContainer"]
+text = "12"
+placeholder_text = "0 or higher"
+
+[node name="PositionLabel" type="Label" parent="UI/SpeedPanel/MarginContainer/VBoxContainer"]
+text = "Position: (0, 0)"
+
+[node name="PositionXInput" type="LineEdit" parent="UI/SpeedPanel/MarginContainer/VBoxContainer"]
+placeholder_text = "X coordinate"
+
+[node name="PositionYInput" type="LineEdit" parent="UI/SpeedPanel/MarginContainer/VBoxContainer"]
+placeholder_text = "Z coordinate"
+
+[node name="MoveButton" type="Button" parent="UI/SpeedPanel/MarginContainer/VBoxContainer"]
+text = "Move To Position"

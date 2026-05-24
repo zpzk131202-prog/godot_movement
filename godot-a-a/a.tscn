@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://djuimmokb6xbk"]
+
+[ext_resource type="Script" uid="uid://b8m8pby3hrfm2" path="res://new_script.gd" id="1_4j3xw"]
+[ext_resource type="Texture2D" path="res://a.png" id="2_4qv5w"]
+[ext_resource type="Texture2D" path="res://b.png" id="3_7n2ke"]
+[ext_resource type="Texture2D" path="res://c.png" id="4_u7w2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v2kz"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k3g0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4qv5w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4qv5w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7n2ke")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=2072201964]
+position = Vector2(576, 324)
+script = ExtResource("1_4j3xw")
+
+[node name="Background" type="Node2D" parent="." unique_id=105672341]
+top_level = true
+z_index = -10
+position = Vector2(576, 324)
+
+[node name="Tile" type="Sprite2D" parent="Background" unique_id=583214901]
+texture = ExtResource("4_u7w2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1673171600]
+shape = SubResource("RectangleShape2D_7v2kz")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1876809682]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_k3g0a")
+animation = &"idle"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=126878725]
+enabled = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=104598221]
+
+[node name="SpeedPanel" type="PanelContainer" parent="UI" unique_id=183426707]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 300.0
+offset_bottom = 210.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/SpeedPanel" unique_id=689954211]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SpeedPanel/MarginContainer" unique_id=958391171]
+
+[node name="SpeedLabel" type="Label" parent="UI/SpeedPanel/MarginContainer/VBoxContainer" unique_id=473630502]
+text = "Speed: 300"
+
+[node name="SpeedInput" type="LineEdit" parent="UI/SpeedPanel/MarginContainer/VBoxContainer" unique_id=732620834]
+text = "300"
+placeholder_text = "0 or higher"
+
+[node name="PositionLabel" type="Label" parent="UI/SpeedPanel/MarginContainer/VBoxContainer" unique_id=336155902]
+text = "Position: (576, 324)"
+
+[node name="PositionXInput" type="LineEdit" parent="UI/SpeedPanel/MarginContainer/VBoxContainer" unique_id=268431177]
+placeholder_text = "X coordinate"
+
+[node name="PositionYInput" type="LineEdit" parent="UI/SpeedPanel/MarginContainer/VBoxContainer" unique_id=915347681]
+placeholder_text = "Y coordinate"
+
+[node name="MoveButton" type="Button" parent="UI/SpeedPanel/MarginContainer/VBoxContainer" unique_id=492987510]
+text = "Move To Position"
